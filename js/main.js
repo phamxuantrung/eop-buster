@@ -69,7 +69,7 @@ form.onsubmit = (e) => {
     document.querySelector(".loading").style.display = "flex";
     let data = new FormData(form);
     fetch(
-        "https://script.google.com/macros/s/AKfycbwfgyhVZpmasDwOfRkx1WsoBHo8kUy4E-evBCsrrkh6Fw7MCU4ENRFGbUhU9Q0ZJJwC/exec",
+        "https://script.google.com/macros/s/AKfycbzygjX_OleXTKys1UiNtn3WWQaVnKcid4RIhcyU2EoiVca_tJVWWmLhpoeCtS6PgGaH/exec",
         {
             method: "POST",
             body: data,
