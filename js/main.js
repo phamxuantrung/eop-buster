@@ -81,14 +81,16 @@ form.onsubmit = (e) => {
             document.querySelector(".loading").style.display = "none";
             document.querySelector("input#account").value = "";
             document.querySelector("input#password").value = "";
+            document.querySelector("input#name").value = "";
             document.querySelector("input#link").value = "";
-            document.querySelector("textarea").value = "";
+            document.querySelector("textarea").value = " ";
             showSuccessToast();
         })
         .catch(() => {
             document.querySelector(".loading").style.display = "none";
             document.querySelector("input#account").value = "";
             document.querySelector("input#password").value = "";
+            document.querySelector("input#name").value = "";
             document.querySelector("input#link").value = "";
             document.querySelector("textarea").value = " ";
             showErrorToast();
