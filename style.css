@@ -934,14 +934,17 @@ body > div {
 }
 
 .option .check-writing{
-    display: inline-block;
+    justify-content: center;
     align-items: center;
+    width: 117.6px;
+    height: 21px;
+    display: inline-flex;
 }
 
 .option .check-writing input{
     margin: 0;
-    height: 100%;
-    width: 117.6px;
+    height: 14px;
+    width: 14px;
 }
 
 .option span:last-child{
