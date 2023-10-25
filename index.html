@@ -84,8 +84,7 @@
           </div>
           <div class="section-content text-center">
             <div class="row">
-              <a href="#" data-scroll-nav="6" class="col-md-4 item-service"
-                onclick="toRegisterPage('Basic Package (7.000/unit)')">
+              <a href="#" data-scroll-nav="6" class="col-md-4 item-service">
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.2s"> <i class="fa fa-life-ring"
                     aria-hidden="true"></i>
                   <h5>Basic Package</h5>
@@ -93,16 +92,14 @@
                   <div class="price"><span>7.000</span><span>/unit</span></div>
                 </div>
               </a>
-              <a href="#" data-scroll-nav="6" class="col-md-4 item-service"
-                onclick="toRegisterPage('Fast Package (10.000/unit)')">
+              <a href="#" data-scroll-nav="6" class="col-md-4 item-service">
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.4s"> <i class="fa fa-bolt" aria-hidden="true"></i>
                   <h5>Fast Package</h5>
                   <p>Làm cấp tốc xong trong ngày với mức độ ưu tiên cao.</p>
                   <div class="price"><span>10.000</span><span>/unit</span></div>
                 </div>
               </a>
-              <a href="#" data-scroll-nav="6" class="col-md-4 item-service"
-                onclick="toRegisterPage('Writing Package (5.000/task)')">
+              <a href="#" data-scroll-nav="6" class="col-md-4 item-service">
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.6s"> <i class="fa-solid fa-file"
                     aria-hidden="true"></i>
                   <h5>Writing Package</h5>
@@ -110,8 +107,7 @@
                   <div class="price"><span>5.000</span><span>/task</span></div>
                 </div>
               </a>
-              <a href="#" data-scroll-nav="6" class="col-md-4 item-service"
-                onclick="toRegisterPage('Test Package (15.000/test)')">
+              <a href="#" data-scroll-nav="6" class="col-md-4 item-service">
                 <div class="icon-box wow fadeInUp" data-wow-delay="0.8s"> <i class="fa-solid fa-pen-to-square"
                     aria-hidden="true"></i>
                   <h5>Test Package</h5>
@@ -326,12 +322,13 @@
             <div class="row">
               <div class="col-sm-12 col-md-12 col-lg-8">
                 <form id="contact_form">
-                  <select id="package" name="package">
+                  <!-- <select id="package" name="package">
                     <option value="Basic Package (7.000/unit)">Basic Package (7.000/unit)</option>
                     <option value="Fast Package (10.000/unit)">Fast Package (10.000/unit)</option>
                     <option value="Writing Package (5.000/task)">Writing Package (5.000/task)</option>
                     <option value="Test Package (15.000/test)">Test Package (15.000/test)</option>
-                  </select>
+                  </select> -->
+                  <input type="text" id="name" class="form-input w-100" name="name" placeholder="Họ tên" required>
                   <div class="row">
                     <div class="col">
                       <input type="text" id="account" class="form-input w-100" name="account"
@@ -342,14 +339,105 @@
                         placeholder="Mật khẩu eop" required>
                     </div>
                   </div>
-                  <input type="text" id="name" class="form-input w-100" name="name"
-                    placeholder="Họ tên" required>
                   <input type="text" id="link" class="form-input w-100" name="link"
                     placeholder="Link Facebook hoặc zalo" required>
-                  <textarea class="form-input w-100" id="note" placeholder="Ghi chú (số lượng, thời hạn, ...)"
-                    name="note"></textarea>
-                  <button id="submit-button" class="btn-grad w-100 text-uppercase" type="submit"
-                    name="button">Gửi</button>
+                  <textarea class="form-input w-100" id="note" placeholder="Ghi chú" name="note"></textarea>
+                  <textarea name="package" id="package" hidden></textarea>
+                  <input type="text" name="pay" id="pay" hidden>
+                  <div class="option">
+                    <div class="english-current">
+                      <input type="text" placeholder="Nhập vào tiếng anh bạn muốn làm" required>
+                    </div>
+                    <div class="item-package unit" price="7">
+                      <div>
+                        <div class="package-des">Một Unit thường</div>
+                        <select name="choose-unit" required>
+                          <option value="">Unit hiện tại</option>
+                          <option value="Unit 1">Unit 1</option>
+                          <option value="Unit 2">Unit 2</option>
+                          <option value="Unit 3">Unit 3</option>
+                          <option value="Unit 4">Unit 4</option>
+                          <option value="Unit 5">Unit 5</option>
+                          <option value="Unit 6">Unit 6</option>
+                          <option value="Unit 7">Unit 7</option>
+                          <option value="Unit 8">Unit 8</option>
+                        </select>
+                      </div>
+                      <div class="setting-control">
+                        <div style="display: inline-flex; margin-right: 24px;">
+                          <div class="package-price-1">₫ 10.000</div>
+                          <div class="package-price-2">₫ 7.000</div>
+                        </div>
+                        <div class="setting-amount">
+                          <span>-</span>
+                          <span class="amount-view">0</span>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="item-package-more" price="3">
+                      <div class="package-des">
+                        <div class="deal">Combo khuyến mãi</div>
+                        <div>Kèm Writing</div>
+                      </div>
+                      <div class="setting-control">
+                        <div style="display: inline-flex; margin-right: 24px;">
+                          <div class="package-price-1">₫ 0.000</div>
+                          <div class="package-price-2">₫ 0.000</div>
+                        </div>
+                        <div class="check-writing">
+                          <input type="checkbox" name="" id="">
+                        </div>
+                      </div>
+                    </div>
+                    <div style="width: 100%; background-color: #d2d2d2; height: 1px; margin-bottom: 8px;"></div>
+                    <div class="item-package test" price="10">
+                      <div>
+                        <div class="package-des">Một bài test</div>
+                        <select name="choose-test">
+                          <option value="">Unit Test hiện tại</option>
+                          <option value="Test 1">Unit Test 1</option>
+                          <option value="Test 2">Unit Test 2</option>
+                          <option value="Test 3">Unit Test 3</option>
+                          <option value="Test 4">Unit Test 4</option>
+                          <option value="Test 5">Unit Test 5</option>
+                          <option value="Test 6">Unit Test 6</option>
+                          <option value="Test 7">Unit Test 7</option>
+                          <option value="Test 8">Unit Test 8</option>
+                        </select>
+                      </div>
+                      <div class="setting-control">
+                        <div style="display: inline-flex; margin-right: 24px;">
+                          <div class="package-price-1">₫ 15.000</div>
+                          <div class="package-price-2">₫ 10.000</div>
+                        </div>
+                        <div class="setting-amount">
+                          <span>-</span>
+                          <span class="amount-view">0</span>
+                          <span>+</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div style="width: 100%; background-color: #d2d2d2; height: 1px; margin-bottom: 8px;"></div>
+                    <div class="fod">
+                      <div class="fod-des">Hình thức làm bài</div>
+                      <div class="fod-speed">
+                        <select name="choose-fod-speed">
+                          <option value="normal">Bình thường</option>
+                          <option value="fast">Nhanh</option>
+                        </select>
+                        <div class="fod-speed-des">Làm xong trong vòng 2 - 7 ngày</div>
+                      </div>
+                      <div class="fod-price">Free</div>
+                    </div>
+                    <div class="pay">
+                      <div style="display: flex;">
+                        <div class="pay-des">Tổng thanh toán</div>
+                        <div class="pay-total">₫ 0</div>
+                      </div>
+                      <button id="submit-button" type="submit" name="button">Đặt</button>
+                    </div>
+                  </div>
                 </form>
               </div>
               <div class="col-sm-12 col-md-12 col-lg-4">

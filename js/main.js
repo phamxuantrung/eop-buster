@@ -63,13 +63,164 @@ function showErrorToast() {
     });
 }
 
+// Form Handling
+
+let valueUnitChanged = false, valueTestChanged = false;
+let totalPay = 0;
+let totalFast = 0;
+let 
+    pEnglish = ""
+    pUnitCurrent = "",
+    pUnit = "",
+    pTestCurrent = "",
+    pTest = "",
+    pSpeed = "\nNORMAL SPEED";
+
+function addValue(){
+    document.getElementById("package").value = `${pEnglish}${pUnitCurrent}${pUnit}${pTestCurrent}${pTest}${pSpeed}`;
+    document.getElementById("pay").value = document.querySelector(".pay-total").innerText
+}
+
+document.querySelectorAll(".item-package").forEach((item, index) => {
+    let price = Number(item.getAttribute("price"));
+    item.querySelector("span:last-child").onclick = function () {
+        let current = Number(item.querySelector(".amount-view").innerText);
+        item.querySelector(".amount-view").innerText = ++current;
+        totalFast += 3;
+        if(document.querySelector(".check-writing input").checked && index === 0) totalPay += price + 3;
+        else totalPay += price;
+        if(document.querySelector("select[name='choose-fod-speed']").value === "fast") {
+            document.querySelector(".fod-price").innerText = `₫ ${totalFast}.000`;
+            document.querySelector(".pay-total").innerText = `₫ ${totalPay + totalFast}.000`;
+        } else
+            document.querySelector(".pay-total").innerText = `₫ ${totalPay}.000`;
+        
+        if(index === 0){
+            document.querySelector(".item-package-more .package-price-1").innerText = `₫ ${5*current}.000`;
+            document.querySelector(".item-package-more .package-price-2").innerText = `₫ ${3*current}.000`;
+        }
+
+        if (index === 0) {
+            if(document.querySelector(".check-writing input").checked) pUnit = `[Amount = ${current}, Writing]`
+            else pUnit = `[Amount = ${current}]`
+        };
+        if (index === 1) pTest = `[Amount = ${current}]`;
+        addValue();
+    };
+    item.querySelector("span:first-child").onclick = function () {
+        let current = Number(item.querySelector(".amount-view").innerText);
+        if (current === 0) return;
+        item.querySelector(".amount-view").innerText = --current;
+        totalFast -= 3;
+        if(document.querySelector(".check-writing input").checked && index === 0) totalPay -= price + 3;
+        else totalPay -= price;
+        document.querySelector(".pay-total").innerText = `₫ ${totalPay}.000`;
+        if(document.querySelector("select[name='choose-fod-speed']").value === "fast") {
+            document.querySelector(".fod-price").innerText = `₫ ${totalFast}.000`;
+            document.querySelector(".pay-total").innerText = `₫ ${totalPay + totalFast}.000`;
+        } else
+            document.querySelector(".pay-total").innerText = `₫ ${totalPay}.000`;
+        if(index === 0){
+            document.querySelector(".item-package-more .package-price-1").innerText = `₫ ${5*current}.000`;
+            document.querySelector(".item-package-more .package-price-2").innerText = `₫ ${3*current}.000`;
+        }
+
+        if (index === 0) {
+            if (current === 0) {
+                pUnit = "";
+                pUnitCurrent = "";
+                document.querySelector("select[name='choose-unit']").value = ""
+                valueUnitChanged = false;
+            }
+            else {
+                if(document.querySelector(".check-writing input").checked) pUnit = `[Amount = ${current}, Writing]`
+                else pUnit = `[Amount = ${current}]`
+            }
+        };
+        if (index === 1) {
+            if(current === 0) {
+                pTest = "";
+                pTestCurrent = "";
+                document.querySelector("select[name='choose-test']").value = ""
+                valueTestChanged = false;
+            }
+            else pTest = `[Amount = ${current}]`
+        };
+        addValue();
+    };
+});
+
+document.querySelector(".item-package-more .check-writing").onclick =
+    function () {
+        let current = Number(document.querySelector(".amount-view").innerText);
+        if (this.querySelector("input").checked){
+            totalPay += 3 * current;
+            pUnit = pUnit.replace("]", ", Writing]")
+        }
+        else {
+            totalPay -= 3 * current;
+            pUnit = pUnit.replace(", Writing]", "]")
+        };
+        if (
+            document.querySelector("select[name='choose-fod-speed']").value === "fast"
+        ) {
+            document.querySelector(".fod-price").innerText = `₫ ${totalFast}.000`;
+            document.querySelector(".pay-total").innerText = `₫ ${totalPay + totalFast}.000`;
+        } else
+            document.querySelector(".pay-total").innerText = `₫ ${totalPay}.000`;
+        addValue();
+    };
+
+document.querySelector(".english-current input").oninput = function(){
+    pEnglish = this.value.charAt(0).toUpperCase() + this.value.slice(1)
+    addValue();
+}
+
+document.querySelector("select[name='choose-unit']").onchange = function () {
+    if(!valueUnitChanged) document.querySelector(".item-package.unit span:last-child").click()
+    valueUnitChanged = true
+    pUnitCurrent = `\nUnit current: ${this.value}, `;
+    addValue();
+};
+
+document.querySelector("select[name='choose-test']").onchange = function () {
+    if(!valueTestChanged) document.querySelector(".item-package.test span:last-child").click()
+    valueTestChanged = true
+    pTestCurrent = `\nTest current: ${this.value}, `;
+    addValue();
+};
+
+document.querySelector("select[name='choose-fod-speed']").onchange =
+    function () {
+        if (this.value === "fast") {
+            document.querySelector(".fod-speed-des").innerText =
+                "Làm xong ngay trong ngày";
+            document.querySelector(
+                ".fod-price"
+            ).innerText = `₫ ${totalFast}.000`;
+            document.querySelector(".pay-total").innerText = `₫ ${totalPay + totalFast
+                }.000`;
+            pSpeed = "\nFAST SPEED"
+            
+        } else {
+            document.querySelector(".fod-speed-des").innerText =
+                "Làm xong trong vòng 2 - 7 ngày";
+            document.querySelector(".fod-price").innerText = "Free";
+            document.querySelector(
+                ".pay-total"
+            ).innerText = `₫ ${totalPay}.000`;
+            pSpeed = "\nNORMAL SPEED"
+        }
+        addValue()
+    };
+
 let form = document.querySelector("#contact_form");
 form.onsubmit = (e) => {
     e.preventDefault();
     document.querySelector(".loading").style.display = "flex";
     let data = new FormData(form);
     fetch(
-        "https://script.google.com/macros/s/AKfycbw1fRrCCL6_21qJDpXuI9SlsOGYJyUGNNlNV0rbYgu5vG9znm-euBTQfM-wiVGg2gsm/exec",
+        "https://script.google.com/macros/s/AKfycbxqvxoHJL6PRAh9H46B8QbMUWG3S7sYQbXkihyScIEtmETYGKJAymV0wcDCzl8xq0U/exec",
         {
             method: "POST",
             body: data,
@@ -78,26 +229,27 @@ form.onsubmit = (e) => {
         // The fetch() method is used to make a request to the server and retrieve data.
         // This is an example API endpoint. Replace it with the actual URL for the API endpoint you want to use.
         .then(() => {
-            document.querySelector(".loading").style.display = "none";
-            document.querySelector("input#account").value = "";
-            document.querySelector("input#password").value = "";
-            document.querySelector("input#name").value = "";
-            document.querySelector("input#link").value = "";
-            document.querySelector("textarea").value = " ";
+            clearData();
             showSuccessToast();
         })
         .catch(() => {
-            document.querySelector(".loading").style.display = "none";
-            document.querySelector("input#account").value = "";
-            document.querySelector("input#password").value = "";
-            document.querySelector("input#name").value = "";
-            document.querySelector("input#link").value = "";
-            document.querySelector("textarea").value = " ";
+            clearData();
             showErrorToast();
         });
-
 };
 
-function toRegisterPage(string) {
-    document.querySelector("select#package").value = string;
+function clearData(){
+    document.querySelector(".loading").style.display = "none";
+    document.querySelectorAll("input").forEach(e => e.value = "")
+    document.querySelectorAll("textarea").forEach(e => e.value = "")
+    document.querySelector("select[name='choose-unit']").value = ""
+    document.querySelector("select[name='choose-test']").value = ""
+    document.querySelector("select[name='choose-fod-speed']").value = "normal"
+    document.querySelector(".fod-price").innerText = "Free"
+    document.querySelector(".fod-speed-des").innerText = "Làm xong trong vòng 2 - 7 ngày"
+    document.querySelector(".pay-total").innerText = "₫ 0"
+    document.querySelectorAll(".amount-view").forEach(e => e.innerText = "0")
+    document.querySelector(".check-writing input").checked = false
+    totalPay = 0;
+    totalFast = 0;
 }

@@ -854,3 +854,226 @@ body > div {
     color: rgba(0, 0, 0, 0.3);
     cursor: pointer;
 }
+
+.option{
+    width: 100%;
+    background-color: white;
+    border-radius: 10px;
+    margin-bottom: 1rem;
+    padding: 1.5rem 1rem;
+}
+
+.option .english-current input{
+    width: 100%;
+    padding: 0;
+    outline: none;
+    border-bottom: 1px #d2d2d2 solid;
+    border-radius: 0;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.option .item-package, .option .item-package-more{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    padding: 6px;
+}
+
+.option .package-des{
+    display: inline-flex;
+    font-size: 15px;
+}
+
+.option .package-des .deal{
+    padding: 1px 4px;
+    margin-right: 8px;
+    line-height: 22px;
+    vertical-align: middle;
+    color: #7a60ff;
+    font-size: 10px;
+    border: 1px solid;
+    border-radius: 2px;
+    font-weight: 400;
+}
+
+.option .package-price-1{
+    color: gray;
+    text-decoration: line-through;
+    font-weight: 500;
+    margin-right: 6px;
+}
+
+.option .package-price-2{
+    color: #7a60ff;
+    font-weight: 700;
+}
+
+.option .setting-amount{
+    display: inline-flex;
+    border: 1px #d2d2d2 solid;
+}
+
+.option span{
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    user-select: none;
+}
+
+.option span:first-child{
+    border-right: 1px #d2d2d2 solid;
+    cursor: pointer;
+}
+
+.option span.amount-view{
+    width: 52px;
+}
+
+.option .check-writing{
+    display: inline-block;
+    align-items: center;
+}
+
+.option .check-writing input{
+    margin: 0;
+    height: 100%;
+    width: 117.6px;
+}
+
+.option span:last-child{
+    border-left: 1px #d2d2d2 solid;
+    cursor: pointer;
+}
+
+.option select{
+    font-size: 14px;
+    color: gray;
+    padding: 2px 8px;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+.option .fod{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px;
+}
+
+.option .fod-des{
+    color: #00bfa5;
+}
+
+.option .fod-speed{
+    margin: 0 8px;
+}
+
+.option .fod-speed select{
+    color: #333;
+    padding: 0;
+}
+
+
+.option .fod-speed div:last-child{
+    color: gray;
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+
+.option .pay{
+    display: flex;
+    position: relative;
+    margin-top: 16px;
+    padding-top: 1.5rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.option .pay .pay-des{
+    font-size: 16px;
+    margin-right: 16px;
+}
+
+.option .pay .pay-total{
+    font-size: 16px;
+    font-weight: 700;
+    color: #7a60ff;
+}
+
+.option .pay::after{
+    content: "";
+    position: absolute;
+    top: -1.25rem;
+    left: -1rem;
+    height: 1.25rem;
+    width: calc(100% + 2rem);
+    background: linear-gradient(transparent,rgba(0,0,0,.06));
+}
+
+.option .pay button{
+    background-color: #7a60ff;
+    border: none;
+    color: white;
+    padding: 8px 50px;
+    cursor: pointer;
+}
+
+@media all and (max-width: 768px){
+    .option .setting-control{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+@media all and (max-width: 500px){
+    .option .setting-control{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-top: 4px;
+    }
+
+    .option .item-package, .option .item-package-more{
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    .option .fod{
+        display: block;
+        position: relative;
+    }
+
+    .option .fod .fod-speed{
+        margin: 4px 0 4px -4px;
+    }
+
+    .option .fod .fod-price{
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+    }
+
+    .option .pay{
+        display: block;
+    }
+
+    .option .pay div{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .option .pay button{
+        margin-top: 8px;
+        width: 100%;
+    }
+}
