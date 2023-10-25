@@ -953,9 +953,12 @@ body > div {
     font-size: 14px;
     color: gray;
     padding: 2px 8px;
-    border: none;
+    padding: 2px 4px;
+    border: 1px solid #d2d2d2;
+    border-radius: 1px;
     outline: none;
     background: transparent;
+    margin-left: 4px;
 }
 
 .option .fod{
@@ -975,14 +978,16 @@ body > div {
 
 .option .fod-speed select{
     color: #333;
-    padding: 0;
+    padding: 2px 4px;
+    border: 1px solid #d2d2d2;
+    border-radius: 1px;
+    margin-left: 0;
 }
 
 
 .option .fod-speed div:last-child{
     color: gray;
     font-size: 12px;
-    margin-left: 4px;
 }
 
 
@@ -1053,7 +1058,7 @@ body > div {
     }
 
     .option .fod .fod-speed{
-        margin: 4px 0 4px -4px;
+        margin: 4px 0 4px 0;
     }
 
     .option .fod .fod-price{
