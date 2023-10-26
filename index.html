@@ -346,13 +346,13 @@
                   <input type="text" name="pay" id="pay" hidden>
                   <div class="option">
                     <div class="english-current">
-                      <input type="text" placeholder="Nhập vào tiếng anh bạn muốn làm" required>
+                      <input type="text" placeholder="Bạn đang học tiếng anh ngành gì?" required>
                     </div>
                     <div class="item-package unit" price="7">
                       <div>
-                        <div class="package-des">Một Unit thường</div>
+                        <div class="package-des">Unit thường</div>
                         <select name="choose-unit" required>
-                          <option value="">Unit hiện tại</option>
+                          <option value="" disabled selected>Làm từ Unit?</option>
                           <option value="Unit 1">Unit 1</option>
                           <option value="Unit 2">Unit 2</option>
                           <option value="Unit 3">Unit 3</option>
@@ -393,9 +393,9 @@
                     <div style="width: 100%; background-color: #d2d2d2; height: 1px; margin-bottom: 8px;"></div>
                     <div class="item-package test" price="10">
                       <div>
-                        <div class="package-des">Một bài test</div>
+                        <div class="package-des">Unit test</div>
                         <select name="choose-test">
-                          <option value="">Unit Test hiện tại</option>
+                          <option value="" disabled selected>Làm từ Test?</option>
                           <option value="Test 1">Unit Test 1</option>
                           <option value="Test 2">Unit Test 2</option>
                           <option value="Test 3">Unit Test 3</option>
@@ -419,6 +419,11 @@
                       </div>
                     </div>
                     <div style="width: 100%; background-color: #d2d2d2; height: 1px; margin-bottom: 8px;"></div>
+                    <div class="deadline">
+                      <div>Hoàn thành trước: </div>
+                      <input type="date" name="deadline" id="" required>
+                    </div>
+                    <div style="width: 100%; background-color: #d2d2d2; height: 1px; margin-bottom: 8px;"></div>
                     <div class="fod">
                       <div class="fod-des">Hình thức làm bài</div>
                       <div class="fod-speed">
@@ -433,7 +438,7 @@
                     <div class="pay">
                       <div style="display: flex;">
                         <div class="pay-des">Tổng thanh toán</div>
-                        <div class="pay-total">₫ 0</div>
+                        <div class="pay-total">₫ 0.000</div>
                       </div>
                       <button id="submit-button" type="submit" name="button">Đặt</button>
                     </div>

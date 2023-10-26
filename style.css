@@ -24,6 +24,11 @@ h5 {
 h6 {
     font-weight: 500;
 }
+
+input, select, textarea{
+    outline-color: #7a60ff !important;
+}
+
 .white {
     color: #ffffff !important;
 }
@@ -954,12 +959,11 @@ body > div {
 
 .option select{
     font-size: 14px;
-    color: gray;
+    color: #333;
     padding: 2px 8px;
     padding: 2px 4px;
     border: 1px solid #d2d2d2;
     border-radius: 1px;
-    outline: none;
     background: transparent;
     margin-left: 4px;
 }
@@ -1030,6 +1034,19 @@ body > div {
     color: white;
     padding: 8px 50px;
     cursor: pointer;
+}
+
+.option .deadline{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.option .deadline input{
+    border: 1px solid #d2d2d2;
+    border-radius: 0;
+    margin-bottom: 0;
 }
 
 @media all and (max-width: 768px){

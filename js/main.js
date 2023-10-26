@@ -68,16 +68,17 @@ function showErrorToast() {
 let valueUnitChanged = false, valueTestChanged = false;
 let totalPay = 0;
 let totalFast = 0;
-let 
+let
     pEnglish = ""
     pUnitCurrent = "",
     pUnit = "",
     pTestCurrent = "",
     pTest = "",
+    pDeadline = "",
     pSpeed = "\nNORMAL SPEED";
 
-function addValue(){
-    document.getElementById("package").value = `${pEnglish}${pUnitCurrent}${pUnit}${pTestCurrent}${pTest}${pSpeed}`;
+function addValue() {
+    document.getElementById("package").value = `${pEnglish}${pUnitCurrent}${pUnit}${pTestCurrent}${pTest}${pDeadline}${pSpeed}`;
     document.getElementById("pay").value = document.querySelector(".pay-total").innerText
 }
 
@@ -87,21 +88,21 @@ document.querySelectorAll(".item-package").forEach((item, index) => {
         let current = Number(item.querySelector(".amount-view").innerText);
         item.querySelector(".amount-view").innerText = ++current;
         totalFast += 3;
-        if(document.querySelector(".check-writing input").checked && index === 0) totalPay += price + 3;
+        if (document.querySelector(".check-writing input").checked && index === 0) totalPay += price + 3;
         else totalPay += price;
-        if(document.querySelector("select[name='choose-fod-speed']").value === "fast") {
+        if (document.querySelector("select[name='choose-fod-speed']").value === "fast") {
             document.querySelector(".fod-price").innerText = `₫ ${totalFast}.000`;
             document.querySelector(".pay-total").innerText = `₫ ${totalPay + totalFast}.000`;
         } else
             document.querySelector(".pay-total").innerText = `₫ ${totalPay}.000`;
-        
-        if(index === 0){
-            document.querySelector(".item-package-more .package-price-1").innerText = `₫ ${5*current}.000`;
-            document.querySelector(".item-package-more .package-price-2").innerText = `₫ ${3*current}.000`;
+
+        if (index === 0) {
+            document.querySelector(".item-package-more .package-price-1").innerText = `₫ ${5 * current}.000`;
+            document.querySelector(".item-package-more .package-price-2").innerText = `₫ ${3 * current}.000`;
         }
 
         if (index === 0) {
-            if(document.querySelector(".check-writing input").checked) pUnit = `[Amount = ${current}, Writing]`
+            if (document.querySelector(".check-writing input").checked) pUnit = `[Amount = ${current}, Writing]`
             else pUnit = `[Amount = ${current}]`
         };
         if (index === 1) pTest = `[Amount = ${current}]`;
@@ -112,17 +113,17 @@ document.querySelectorAll(".item-package").forEach((item, index) => {
         if (current === 0) return;
         item.querySelector(".amount-view").innerText = --current;
         totalFast -= 3;
-        if(document.querySelector(".check-writing input").checked && index === 0) totalPay -= price + 3;
+        if (document.querySelector(".check-writing input").checked && index === 0) totalPay -= price + 3;
         else totalPay -= price;
         document.querySelector(".pay-total").innerText = `₫ ${totalPay}.000`;
-        if(document.querySelector("select[name='choose-fod-speed']").value === "fast") {
+        if (document.querySelector("select[name='choose-fod-speed']").value === "fast") {
             document.querySelector(".fod-price").innerText = `₫ ${totalFast}.000`;
             document.querySelector(".pay-total").innerText = `₫ ${totalPay + totalFast}.000`;
         } else
             document.querySelector(".pay-total").innerText = `₫ ${totalPay}.000`;
-        if(index === 0){
-            document.querySelector(".item-package-more .package-price-1").innerText = `₫ ${5*current}.000`;
-            document.querySelector(".item-package-more .package-price-2").innerText = `₫ ${3*current}.000`;
+        if (index === 0) {
+            document.querySelector(".item-package-more .package-price-1").innerText = `₫ ${5 * current}.000`;
+            document.querySelector(".item-package-more .package-price-2").innerText = `₫ ${3 * current}.000`;
         }
 
         if (index === 0) {
@@ -133,12 +134,12 @@ document.querySelectorAll(".item-package").forEach((item, index) => {
                 valueUnitChanged = false;
             }
             else {
-                if(document.querySelector(".check-writing input").checked) pUnit = `[Amount = ${current}, Writing]`
+                if (document.querySelector(".check-writing input").checked) pUnit = `[Amount = ${current}, Writing]`
                 else pUnit = `[Amount = ${current}]`
             }
         };
         if (index === 1) {
-            if(current === 0) {
+            if (current === 0) {
                 pTest = "";
                 pTestCurrent = "";
                 document.querySelector("select[name='choose-test']").value = ""
@@ -150,10 +151,10 @@ document.querySelectorAll(".item-package").forEach((item, index) => {
     };
 });
 
-document.querySelector(".item-package-more .check-writing").onclick =
+document.querySelector(".item-package-more .check-writing input").onclick =
     function () {
         let current = Number(document.querySelector(".amount-view").innerText);
-        if (this.querySelector("input").checked){
+        if (this.checked) {
             totalPay += 3 * current;
             pUnit = pUnit.replace("]", ", Writing]")
         }
@@ -171,20 +172,20 @@ document.querySelector(".item-package-more .check-writing").onclick =
         addValue();
     };
 
-document.querySelector(".english-current input").oninput = function(){
+document.querySelector(".english-current input").oninput = function () {
     pEnglish = this.value.charAt(0).toUpperCase() + this.value.slice(1)
     addValue();
 }
 
 document.querySelector("select[name='choose-unit']").onchange = function () {
-    if(!valueUnitChanged) document.querySelector(".item-package.unit span:last-child").click()
+    if (!valueUnitChanged) document.querySelector(".item-package.unit span:last-child").click()
     valueUnitChanged = true
     pUnitCurrent = `\nUnit current: ${this.value}, `;
     addValue();
 };
 
 document.querySelector("select[name='choose-test']").onchange = function () {
-    if(!valueTestChanged) document.querySelector(".item-package.test span:last-child").click()
+    if (!valueTestChanged) document.querySelector(".item-package.test span:last-child").click()
     valueTestChanged = true
     pTestCurrent = `\nTest current: ${this.value}, `;
     addValue();
@@ -201,7 +202,7 @@ document.querySelector("select[name='choose-fod-speed']").onchange =
             document.querySelector(".pay-total").innerText = `₫ ${totalPay + totalFast
                 }.000`;
             pSpeed = "\nFAST SPEED"
-            
+
         } else {
             document.querySelector(".fod-speed-des").innerText =
                 "Làm xong trong vòng 2 - 7 ngày";
@@ -214,13 +215,43 @@ document.querySelector("select[name='choose-fod-speed']").onchange =
         addValue()
     };
 
+
+let today = new Date();
+let deadline = document.querySelector(".deadline input")
+
+let dd = String(today.getDate()).padStart(2, '0');
+let mm = String(today.getMonth() + 1).padStart(2, '0');
+let yyyy = today.getFullYear();
+
+
+deadline.min = `${yyyy}-${mm}-${dd}`;
+
+document.querySelector("input[name='deadline']").onchange = function () {
+    if (this.value == `${yyyy}-${mm}-${dd}`) {
+        document.querySelector("select[name='choose-fod-speed']").value = "fast"
+        document.querySelector("select[name='choose-fod-speed'] option[value='normal']").disabled = true
+        document.querySelector(".fod-speed-des").innerText =
+            "Làm xong ngay trong ngày";
+        document.querySelector(
+            ".fod-price"
+        ).innerText = `₫ ${totalFast}.000`;
+        document.querySelector(".pay-total").innerText = `₫ ${totalPay + totalFast
+            }.000`;
+        pSpeed = "\nFAST SPEED"
+    } else {
+        document.querySelector("select[name='choose-fod-speed'] option[value='normal']").disabled = false
+    }
+    pDeadline = `\nDeadline: ${formatDate(this.value)}`
+    addValue();
+}
+
 let form = document.querySelector("#contact_form");
 form.onsubmit = (e) => {
     e.preventDefault();
     document.querySelector(".loading").style.display = "flex";
     let data = new FormData(form);
     fetch(
-        "https://script.google.com/macros/s/AKfycbxqvxoHJL6PRAh9H46B8QbMUWG3S7sYQbXkihyScIEtmETYGKJAymV0wcDCzl8xq0U/exec",
+        "https://script.google.com/macros/s/AKfycbwIUl7OtZxqfhseHn-cNwdnrxcd1dpg6oRBY9NtrpXEifSM8ebWM21uRv8cdTZ2MROb/exec",
         {
             method: "POST",
             body: data,
@@ -238,7 +269,7 @@ form.onsubmit = (e) => {
         });
 };
 
-function clearData(){
+function clearData() {
     document.querySelector(".loading").style.display = "none";
     document.querySelectorAll("input").forEach(e => e.value = "")
     document.querySelectorAll("textarea").forEach(e => e.value = "")
@@ -246,10 +277,24 @@ function clearData(){
     document.querySelector("select[name='choose-test']").value = ""
     document.querySelector("select[name='choose-fod-speed']").value = "normal"
     document.querySelector(".fod-price").innerText = "Free"
-    document.querySelector(".fod-speed-des").innerText = "Làm xong trong vòng 2 - 7 ngày"
+    document.querySelector(".fod-speed-des").innerText = "Làm xong trong ngày 2 - 7 ngày"
     document.querySelector(".pay-total").innerText = "₫ 0"
     document.querySelectorAll(".amount-view").forEach(e => e.innerText = "0")
     document.querySelector(".check-writing input").checked = false
+    deadline.value = '';
     totalPay = 0;
     totalFast = 0;
 }
+
+function formatDate(inputDate) {
+    // Tách ngày, tháng và năm từ chuỗi đầu vào
+    const parts = inputDate.split("-");
+    
+    // Kiểm tra xem định dạng đầu vào có đúng không
+    if (parts.length !== 3) {
+      return "Ngày không hợp lệ";
+    }
+    
+    // Sắp xếp lại thành "dd/mm/yyyy" và trả về
+    return parts[2] + "/" + parts[1] + "/" + parts[0];
+  }
