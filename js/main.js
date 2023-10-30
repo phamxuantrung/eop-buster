@@ -282,8 +282,17 @@ function clearData() {
     document.querySelectorAll(".amount-view").forEach(e => e.innerText = "0")
     document.querySelector(".check-writing input").checked = false
     deadline.value = '';
+    valueUnitChanged = false;
+    valueTestChanged = false;
     totalPay = 0;
     totalFast = 0;
+    pEnglish = "";
+    pUnitCurrent = "";
+    pUnit = "";
+    pTestCurrent = "";
+    pTest = "";
+    pDeadline = "";
+    pSpeed = "\nNORMAL SPEED";
 }
 
 function formatDate(inputDate) {
