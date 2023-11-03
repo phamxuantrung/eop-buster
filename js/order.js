@@ -26,7 +26,7 @@ let htmlTemplateUnit = units.map(unit => {
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="icon">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
                           </svg>                          
-                        <div class="title">Kèm thêm bài Writing?</div>
+                        <div class="title">Kèm thêm bài Writing (₫ 3.000)</div>
                         <input disabled class="input-checkbox-addwriting" type="checkbox">
                     </div>
     </div>
@@ -174,13 +174,19 @@ document.querySelectorAll(".box .input-checkbox:not(.check-all)").forEach((e, i)
 
 document.querySelectorAll(".box .speed").forEach((e, i) => {
     e.onchange = function () {
+        let p1 =  document.querySelector(".box .price-1")
+        let p2 =  document.querySelector(".box .price-2")
         if (e.value === "fast") {
             fast[i] += 3;
             total += 3;
+            p1.innerText = `₫ ${Number(p1.innerText.slice(2)) + 3}.000`
+            p2.innerText = `₫ ${Number(p2.innerText.slice(2)) + 3}.000`
         }
         else {
             fast[i] -= 3;
             total -= 3;
+            p1.innerText = `₫ ${Number(p1.innerText.slice(2)) - 3}.000`
+            p2.innerText = `₫ ${Number(p2.innerText.slice(2)) - 3}.000`
         }
         totalPay.innerText = `₫ ${total}.000`;
     }
@@ -230,7 +236,7 @@ document.querySelector(".box .button").onclick = function () {
                     ${(e < 8) ? `<div class="title">Unit ${e + 1} (Không bao gồm Writing và Speaking)</div>` : `<div class="title">Unit Test ${e - 7}</div>`}
                 </div>
                 <div class="speed">${speedSelectCurrents[i]}</div>
-                <div class="price">₫ ${(i < 8) ? '7.000' : '10.000'}</div>
+                <div class="price">₫ ${(e < 8) ? ((speedFasts.includes(e)) ?'10.000' : '7.000') : ((speedFasts.includes(e)) ?'13.000' : '10.000')}</div>
             </div>
             ${(e < 8) ? `<div class="addwriting"><div style="display: flex; align-items: center;"><input type="checkbox" ${(addwritingCheckeds.includes(e)) ? 'checked' : ''}><div class="sNymxn"><span>Kèm thêm bài Writing</span><div class="_0IoUJ3">Gợi ý cho bạn</div></div></div><div class="JKf6hB"><span>₫ 3.000</span></div></div>` : ``}</div>
         `

@@ -616,6 +616,10 @@ select {
         margin-right: 10px;
     }
 
+    .toast {
+        width: 330px !important;
+        min-width: 0 !important;
+    }
 }
 
 
