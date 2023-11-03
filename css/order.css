@@ -142,19 +142,19 @@ nav .my-user img {
 nav .my-user p {
     margin-left: 8px;
     color: white;
+    text-transform: capitalize;
 }
 
 nav .setting {
     display: none;
     position: absolute;
     top: calc(100% + 10px);
-    left: 0;
     right: 0;
     background-color: white;
     box-shadow: 0 0 8px 2px #3333332d;
     z-index: 10;
     border-radius: 3px;
-    min-width: 140px;
+    min-width: 150px;
 }
 
 nav .setting::after {
