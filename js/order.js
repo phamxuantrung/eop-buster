@@ -273,6 +273,18 @@ document.querySelector(".box .button").onclick = function () {
     }
 
     document.querySelector(".final .deadline input").onchange = function () {
+        let now = new Date()
+        let selectedDate = new Date(this.value);
+        if(selectedDate.toLocaleDateString() < now.toLocaleDateString()){
+            showErrorDeadline(`Bạn không thể chọn deadline là ngày đã qua!`)
+            this.value = "";
+            return
+        }
+        else if(selectedDate.toLocaleDateString() === now.toLocaleDateString() && speedFasts.length !== productCheckeds.length){
+            showErrorDeadline(`Bạn không thể chọn deadline là ngày hôm nay được. Vui lòng chọn hình thức làm bài "Nhanh"`)
+            this.value = "";
+            return;
+        }
         document.querySelector("#pay-form input[name='deadline']").value = convertDate(document.querySelector(".final input[name='deadline']").value)
     }
 
@@ -425,4 +437,23 @@ function showErrorToast() {
         duration: 5000,
     });
 }
+
+function showErrorDeadline(p) {
+    toast({
+        title: "Lỗi!",
+        message: p,
+        type: "error",
+        duration: 5000,
+    });
+}
+
+function showWarningToast() {
+    toast({
+        title: "Chú ý!",
+        message: `Nếu bạn muốn chúng tôi làm xong ngay trong ngày, hãy chọn hình thức làm bài là "Nhanh".`,
+        type: "warning",
+        duration: 15000,
+    });
+}
+showWarningToast();
 
