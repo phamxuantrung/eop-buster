@@ -275,12 +275,12 @@ document.querySelector(".box .button").onclick = function () {
     document.querySelector(".final .deadline input").onchange = function () {
         let now = new Date()
         let selectedDate = new Date(this.value);
-        if(selectedDate.toLocaleDateString() < now.toLocaleDateString()){
+        if(compareDates(selectedDate.toLocaleDateString(), now.toLocaleDateString()) === -1){
             showErrorDeadline(`Bạn không thể chọn deadline là ngày đã qua!`)
             this.value = "";
             return
         }
-        else if(selectedDate.toLocaleDateString() === now.toLocaleDateString() && speedFasts.length !== productCheckeds.length){
+        if(selectedDate.toLocaleDateString() === now.toLocaleDateString() && speedFasts.length !== productCheckeds.length){
             showErrorDeadline(`Bạn không thể chọn deadline là ngày hôm nay được. Vui lòng chọn hình thức làm bài "Nhanh"`)
             this.value = "";
             return;
@@ -313,6 +313,12 @@ document.querySelector(".box .button").onclick = function () {
     let form = document.querySelector("#pay-form");
     form.onsubmit = (e) => {
         e.preventDefault();
+        if(form.querySelector("input[name='deadline']").value === ""){
+            document.querySelector(".final .last input[name='deadline']").style.borderColor = "rgba(220, 53, 70, 0.404)"
+            document.querySelector(".final .last input[name='deadline']").style.backgroundColor = "rgba(220, 53, 70, 0.12)"
+            document.querySelector(".final form .agree-order input").checked = false;
+            return;
+        }
         document.querySelector(".loading").style.display = "flex";
         let data = new FormData(form);
         fetch(
@@ -372,7 +378,40 @@ function clearData() {
     document.querySelector(".box").style.display = "block"
     document.querySelector(".final").style.display = "none"
     document.querySelector(".loading").style.display = "none"
+    document.querySelector(".final .last input[name='deadline']").style.borderColor = "#e4e4e4"
+    document.querySelector(".final .last input[name='deadline']").style.backgroundColor = "white"
 }
+
+function compareDates(date1, date2) {
+    // Assuming date1 and date2 are strings in the format dd/mm/yyyy
+    const [day1, month1, year1] = date1.split('/');
+    const [day2, month2, year2] = date2.split('/');
+
+    // Convert the parts to integers for comparison
+    const intYear1 = parseInt(year1, 10);
+    const intMonth1 = parseInt(month1, 10);
+    const intDay1 = parseInt(day1, 10);
+
+    const intYear2 = parseInt(year2, 10);
+    const intMonth2 = parseInt(month2, 10);
+    const intDay2 = parseInt(day2, 10);
+
+    // Compare years
+    if (intYear1 > intYear2) return 1;
+    if (intYear1 < intYear2) return -1;
+
+    // Compare months
+    if (intMonth1 > intMonth2) return 1;
+    if (intMonth1 < intMonth2) return -1;
+
+    // Compare days
+    if (intDay1 > intDay2) return 1;
+    if (intDay1 < intDay2) return -1;
+
+    // Dates are equal
+    return 0;
+}
+
 
 function toast({ title = "", message = "", type = "info", duration = 3000 }) {
     const main = document.getElementById("toast");
