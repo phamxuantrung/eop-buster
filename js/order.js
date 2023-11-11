@@ -40,7 +40,7 @@ let htmlTemplateTest = tests.map(test => {
     <div class="item">
     <div class="item-wrapper">
     <div class="item-infor">
-        <div class="input-checkbox" price="7">
+        <div class="input-checkbox" price="10">
             <input type="checkbox">
             <div class="stardust-checkbox"></div>
         </div>
@@ -53,8 +53,8 @@ let htmlTemplateTest = tests.map(test => {
         <option value="fast">Nhanh</option>
     </select>
     <div class="item-price">
-        <div class="price-1">₫ 10.000</div>
-        <div class="price-2">₫ 7.000</div>
+        <div class="price-1">₫ 15.000</div>
+        <div class="price-2">₫ 10.000</div>
     </div>
 </div>
                 </div>
@@ -313,7 +313,7 @@ document.querySelector(".box .button").onclick = function () {
     let form = document.querySelector("#pay-form");
     form.onsubmit = (e) => {
         e.preventDefault();
-        if(form.querySelector("input[name='deadline']").value === ""){
+        if(document.querySelector(".final .last input[name='deadline']").value === ""){
             document.querySelector(".final .last input[name='deadline']").style.borderColor = "rgba(220, 53, 70, 0.404)"
             document.querySelector(".final .last input[name='deadline']").style.backgroundColor = "rgba(220, 53, 70, 0.12)"
             document.querySelector(".final form .agree-order input").checked = false;
